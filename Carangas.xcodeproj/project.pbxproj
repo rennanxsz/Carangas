@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00CBBBFA27DC2ADA0099406C /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CBBBF927DC2ADA0099406C /* Car.swift */; };
+		00CBBBFC27DC2C890099406C /* REST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CBBBFB27DC2C890099406C /* REST.swift */; };
 		A1B18D051F9C1BDD00313110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B18D041F9C1BDD00313110 /* AppDelegate.swift */; };
 		A1B18D0A1F9C1BDD00313110 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1B18D081F9C1BDD00313110 /* Main.storyboard */; };
 		A1B18D0C1F9C1BDD00313110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B18D0B1F9C1BDD00313110 /* Assets.xcassets */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00CBBBF927DC2ADA0099406C /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		00CBBBFB27DC2C890099406C /* REST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REST.swift; sourceTree = "<group>"; };
 		A1B18D011F9C1BDD00313110 /* Carangas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carangas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B18D041F9C1BDD00313110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1B18D091F9C1BDD00313110 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 				A1B18D181F9C1DBA00313110 /* AddEditViewController.swift */,
 				A1B18D1A1F9C1DCF00313110 /* CarViewController.swift */,
 				A1B18D081F9C1BDD00313110 /* Main.storyboard */,
+				00CBBBF927DC2ADA0099406C /* Car.swift */,
+				00CBBBFB27DC2C890099406C /* REST.swift */,
 				A1B18D0B1F9C1BDD00313110 /* Assets.xcassets */,
 				A1B18D0D1F9C1BDD00313110 /* LaunchScreen.storyboard */,
 				A1B18D101F9C1BDD00313110 /* Info.plist */,
@@ -143,7 +149,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1B18D171F9C1D7E00313110 /* CarsTableViewController.swift in Sources */,
+				00CBBBFC27DC2C890099406C /* REST.swift in Sources */,
 				A1B18D051F9C1BDD00313110 /* AppDelegate.swift in Sources */,
+				00CBBBFA27DC2ADA0099406C /* Car.swift in Sources */,
 				A1B18D191F9C1DBA00313110 /* AddEditViewController.swift in Sources */,
 				A1B18D1B1F9C1DCF00313110 /* CarViewController.swift in Sources */,
 			);
