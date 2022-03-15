@@ -14,7 +14,7 @@ enum CarError {
     case noResponse
     case noData
     case responseStatusCode(code: Int)
-    case invalidJson
+    case invalidJSON
 }
 
 class REST {
@@ -38,35 +38,45 @@ class REST {
     //Sessão criada manualmente.
     private static let session = URLSession(configuration: configuration) //URLSession.shared
     
-    class func loadCars(onComplete: ([Car]) -> Void, onError: () -> Void) {
-        guard let url = URL(string: basePath) else {return}
+    class func loadCars(onComplete: @escaping ([Car]) -> Void, onError: @escaping (CarError) -> Void) {
+        guard let url = URL(string: basePath) else {
+            onError(.url)
+            return
+            
+        }
         
         let dataTask = session.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
             
             if error == nil {
                 
-                guard let response = response as? HTTPURLResponse else {return}
+                guard let response = response as? HTTPURLResponse else {
+                    onError(.noResponse)
+                    return
+                    
+                }
                 if response.statusCode == 200 {
                     
                     guard let data = data else {return}
                     do {
                         let cars = try JSONDecoder().decode([Car].self, from: data)
-                        for car in cars {
-                            print(car.name, car.brand)
-                        }
+                        onComplete(cars)
                     } catch {
                         print(error.localizedDescription)
+                        onError(.invalidJSON)
                     }
                     
                 } else {
                     print("Algum status inválido pelo servidor!!")
+                    onError(.responseStatusCode(code: response.statusCode))
                 }
                 
             } else {
-                print(error!)
+                onError(.taskError(error: error!))
             }            
         }
         dataTask.resume()
     }
+    
+    
     
 }

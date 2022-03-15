@@ -19,7 +19,18 @@ class CarsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        REST.loadCars()
+        REST.loadCars { cars in
+            
+            self.cars = cars
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+            
+        } onError: { error in
+            print(error)
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
