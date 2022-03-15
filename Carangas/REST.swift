@@ -8,6 +8,15 @@
 
 import Foundation
 
+enum CarError {
+    case url
+    case taskError(error: Error)
+    case noResponse
+    case noData
+    case responseStatusCode(code: Int)
+    case invalidJson
+}
+
 class REST {
     
     private static let basePath = "https://carangas.herokuapp.com/cars"
@@ -29,7 +38,7 @@ class REST {
     //Sessão criada manualmente.
     private static let session = URLSession(configuration: configuration) //URLSession.shared
     
-    class func loadCars() {
+    class func loadCars(onComplete: ([Car]) -> Void, onError: () -> Void) {
         guard let url = URL(string: basePath) else {return}
         
         let dataTask = session.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
@@ -40,7 +49,7 @@ class REST {
                 if response.statusCode == 200 {
                     
                     guard let data = data else {return}
-                    do{
+                    do {
                         let cars = try JSONDecoder().decode([Car].self, from: data)
                         for car in cars {
                             print(car.name, car.brand)
