@@ -18,12 +18,12 @@ class Car: Codable {
     
     var gas: String {
         switch gasType {
-        case 0:
-            return "Flex"
-        case 1:
-            return "Álcool"
-        default:
-            return "Gasolina"
+            case 0:
+                return "Flex"
+            case 1:
+                return "Álcool"
+            default:
+                return "Gasolina"
         }
     }
     
