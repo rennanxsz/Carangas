@@ -17,6 +17,9 @@ class AddEditViewController: UIViewController {
     @IBOutlet weak var scGasType: UISegmentedControl!
     @IBOutlet weak var btAddEdit: UIButton!
     @IBOutlet weak var loading: UIActivityIndicatorView!
+    
+    //MARK: - Properties
+    var car: Car!
 
     // MARK: - Super Methods
     override func viewDidLoad() {
@@ -25,6 +28,12 @@ class AddEditViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func addEdit(_ sender: UIButton) {
+        if car == nil {
+            car = Car()
+        }
+        car.name = tfName.text!
+        car.brand = tfBrand.text!
+        car.price = 
     }
 
 }

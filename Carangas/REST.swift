@@ -95,11 +95,16 @@ class REST {
         
         let dataTask = session.dataTask(with: resquest) { (data, response, error) in
             if error == nil {
-                
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200, let _ = data else {
+                    onComplete(false)
+                    return
+                }
+                onComplete(true)
             } else {
                 onComplete(false)
             }
         }
+        dataTask.resume()
     }
     
 }
