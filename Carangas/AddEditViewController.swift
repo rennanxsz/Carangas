@@ -33,7 +33,19 @@ class AddEditViewController: UIViewController {
         }
         car.name = tfName.text!
         car.brand = tfBrand.text!
-        car.price = 
+        car.price = Double(tfPrice.text ?? "0")!
+        car.gasType = scGasType.selectedSegmentIndex
+        
+        REST.save(car: car) { (success) in
+            self.goBack()
+        }
     }
-
+    
+    //MARK: - Methods
+    func goBack() {
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+    }
 }
