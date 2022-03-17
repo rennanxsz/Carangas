@@ -36,7 +36,7 @@ class CarsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "viewSegue" {
             let vc = segue.destination as! CarViewController
-            vc.car = cars[tableView.indexPathsForSelectedRows!.row]
+            vc.car = cars[tableView.indexPathForSelectedRow!.row]
         }
     }
 
