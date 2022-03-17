@@ -14,10 +14,22 @@ class CarViewController: UIViewController {
     @IBOutlet weak var lbBrand: UILabel!
     @IBOutlet weak var lbGasType: UILabel!
     @IBOutlet weak var lbPrice: UILabel!
+    
+    //MARK: - Properties
+    var car: Car!
 
     // MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        lbBrand.text = car.brand
+        lbGasType.text = car.gas
+        lbPrice.text = "R$ \(car.price)"
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! AddEditViewController
+        vc.car = car
     }
 
 }

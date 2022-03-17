@@ -19,7 +19,7 @@ class CarsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        REST.loadCars { cars in
+        REST.loadCars { (cars) in
             
             self.cars = cars
             DispatchQueue.main.async {
@@ -31,6 +31,13 @@ class CarsTableViewController: UITableViewController {
             print(error)
         }
 
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewSegue" {
+            let vc = segue.destination as! CarViewController
+            vc.car = cars[tableView.indexPathsForSelectedRows!.row]
+        }
     }
 
     override func didReceiveMemoryWarning() {
