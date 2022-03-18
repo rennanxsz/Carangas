@@ -17,6 +17,12 @@ enum CarError {
     case invalidJSON
 }
 
+enum RESTOperation {
+    case save
+    case update
+    case delete
+}
+
 class REST {
     
     private static let basePath = "https://carangas.herokuapp.com/cars"
@@ -109,15 +115,30 @@ class REST {
     
     class func update(car: Car, onComplete: @escaping (Bool) -> Void) {
         
-        let urlString = basePath + "/" + car._id!
+       
+    }
+    
+    private class func applyOperation(car: Car, operation: RESTOperation , onComplete: @escaping (Bool) -> Void) {
+        
+        let urlString = basePath + "/" + (car._id ?? "")
         
         guard let url = URL(string: urlString ) else {
             onComplete(false)
             return
         }
-        
+        var httpMethod: String
         var resquest = URLRequest(url: url)
-        resquest.httpMethod = "PUT"
+
+        switch operation {
+        case .save:
+            httpMethod = "POST"
+        case .update:
+            httpMethod = "PUT"
+        case .delete:
+            httpMethod = "DELETE"
+        }
+        
+        resquest.httpMethod = httpMethod
         
         guard let json = try? JSONEncoder().encode(car) else {
             onComplete(false)
