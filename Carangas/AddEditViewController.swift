@@ -20,6 +20,14 @@ class AddEditViewController: UIViewController {
     
     //MARK: - Properties
     var car: Car!
+    var brands: [Brand] = []
+    lazy var pickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.backgroundColor = .white
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
 
     // MARK: - Super Methods
     override func viewDidLoad() {
@@ -31,6 +39,18 @@ class AddEditViewController: UIViewController {
             scGasType.selectedSegmentIndex = car.gasType
             btAddEdit.setTitle("Alterar carro", for: .normal)
         }
+        
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+        toolbar.tintColor = UIColor(named: "main")
+        let btCancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+        let btSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let btDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        toolbar.items = [btCancel, btSpace, btDone]
+        tfBrand.inputAccessoryView = toolbar
+        
+        
+        tfBrand.inputView = pickerView
+        
     }
     
     // MARK: - IBActions
@@ -56,10 +76,28 @@ class AddEditViewController: UIViewController {
     }
     
     //MARK: - Methods
+    
+    func loadBrands() {
+        REST.loadBrands { (brands) in
+            if let brands = brands {
+                self.brands = brands
+            }
+        }
+    }
+    
     func goBack() {
         DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
         }
         
+    }
+    
+    @objc func cancel() {
+        tfBrand.resignFirstResponder()
+    }
+    
+    @objc func done() {
+        tfBrand.text = brands[pickerView.selectedRow(inComponent: 0)].fipe_name
+        cancel()
     }
 }
