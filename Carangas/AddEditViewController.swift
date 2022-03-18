@@ -48,13 +48,20 @@ class AddEditViewController: UIViewController {
         toolbar.items = [btCancel, btSpace, btDone]
         tfBrand.inputAccessoryView = toolbar
         
-        
         tfBrand.inputView = pickerView
+        
+        loadBrands()
         
     }
     
     // MARK: - IBActions
     @IBAction func addEdit(_ sender: UIButton) {
+        
+        sender.isEnabled = false
+        sender.backgroundColor = .gray
+        sender.alpha = 0.5
+        loading.startAnimating()
+        
         if car == nil {
             car = Car()
         }
