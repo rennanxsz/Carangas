@@ -80,7 +80,11 @@ class AddEditViewController: UIViewController {
     func loadBrands() {
         REST.loadBrands { (brands) in
             if let brands = brands {
-                self.brands = brands
+                self.brands = brands.sorted(by: {$0.fipe_name < $1.fipe_name})
+                DispatchQueue.main.async {
+                    self.pickerView.reloadAllComponents()
+                }
+                
             }
         }
     }
@@ -100,4 +104,20 @@ class AddEditViewController: UIViewController {
         tfBrand.text = brands[pickerView.selectedRow(inComponent: 0)].fipe_name
         cancel()
     }
+}
+
+extension AddEditViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return brands.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let brand = brands[row]
+        return brand.fipe_name
+        
+    }
+    
 }
